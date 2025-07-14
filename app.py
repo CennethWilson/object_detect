@@ -5,7 +5,7 @@ import numpy as np
 import cv2
 
 app = Flask(__name__)
-model = YOLO("yolov11n.pt")
+model = YOLO("yolo11n.pt")
 
 @app.route("/detect", methods=["POST"])
 def detect():
