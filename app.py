@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from ultralytics import YOLO
 
 import numpy as np
@@ -6,6 +6,10 @@ import cv2
 
 app = Flask(__name__)
 model = YOLO("yolo11n.pt")
+
+@app.route("/")
+def index():
+    return render_template("index.html")
 
 @app.route("/detect", methods=["POST"])
 def detect():
