@@ -7,10 +7,6 @@ import cv2
 app = Flask(__name__)
 model = YOLO("yolo11n.pt")
 
-@app.route("/")
-def index():
-    return render_template("index.html")
-
 @app.route("/detect", methods=["POST"])
 def detect():
     img_data = request.files['image'].read()
@@ -20,6 +16,9 @@ def detect():
     results = model.predict(image)
 
     df = results[0].pandas().xyxy[0]
+    print(
+        jsonify(df.to_dict(orient="records"))
+    )
     return jsonify(df.to_dict(orient="records"))
 
 if __name__ == "__main__":
